@@ -1,9 +1,15 @@
 import spidev
 import time
+import RPi.GPIO as GPIO
 
 class MotorController:
     
-    def __init__(self):
+    def __init__(self, sleepPin):
+        self.sleepPin = sleepPin
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(sleepPin, GPIO.OUT)
+        GPIO.output(sleepPin, 1)
+
         self.spi = spidev.SpiDev()
         self.spi.open(0, 0)
         self.spi.max_speed_hz = 500000
@@ -54,3 +60,11 @@ class MotorController:
             stepDelay = 60 / 200 / speed
             print(stepDelay)
             self.step(75, stepDelay)
+
+    def sleep(self):
+        #could also try turning off ctrl
+        GPIO.output(self.sleepPin, 0)
+
+    def wake(self):
+        GPIO.output(self.sleepPin, 1)
+        

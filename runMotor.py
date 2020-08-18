@@ -13,3 +13,6 @@ m.checkStatus()
 
 while 1:
     m.shoot(int(input('Enter speed:\t')))
+    m.sleep()
+    input('Press Enter to Continue:')
+    m.wake()
