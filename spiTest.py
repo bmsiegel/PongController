@@ -33,7 +33,7 @@ time.sleep(1)
 print_bytes(spi.xfer2([0xF0, 0x00]))
 print_bytes(spi.xfer2([0x80, 0x00]))
 now = time.time()
-for i in range(200):
+for i in range(101000):
     step()
     time.sleep(0.001)
 print(time.time() - now)
