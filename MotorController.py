@@ -18,7 +18,6 @@ class MotorController:
         self.spi.lsbfirst = False
         time.sleep(1)
         self.ctrl = [0x0C, 0x10]
-        print(self.ctrl)
 
     def __del__(self):
         self.spi.close()
@@ -62,9 +61,12 @@ class MotorController:
 
     def shoot(self, speed):
         if speed <= 1000:
+            self.wake()
+            time.sleep(0.25)
             stepDelay = 60 / 200 / speed
-            print(stepDelay)
             self.step(75, stepDelay)
+            time.sleep(1)
+            self.sleep()
 
     def sleep(self):
         GPIO.output(self.sleepPin, 0)
