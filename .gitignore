@@ -1,2 +1,6 @@
 __*
-run*
+runArduinoStepper.py
+runMotor.py
+testMotor.py
+spiTest.py
+
