@@ -19,6 +19,13 @@ class MotorController:
         time.sleep(1)
         self.ctrl = [0x0C, 0x10]
 
+        self.stepDict = {
+                            400:96,
+                            350:90,
+                            300:85,
+                            250:80
+                        }
+
     def __del__(self):
         self.spi.close()
         GPIO.cleanup()
@@ -64,7 +71,9 @@ class MotorController:
             self.wake()
             time.sleep(0.25)
             stepDelay = 60 / 200 / speed
-            self.step(75, stepDelay)
+            steps = self.stepDict[int(speed/50)*50]
+            print(steps)
+            self.step(steps, stepDelay)
             time.sleep(1)
             self.sleep()
 
