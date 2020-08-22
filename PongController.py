@@ -9,8 +9,10 @@ class PongController:
         self.a = ArduinoStepper(steps, A1, A0, B1, B0, CC)
         time.sleep(1)
         self.m.enableMotor()
-        self.a.setSpeed(25)
+        self.a.setSpeed(15)
         time.sleep(1)
+        self.a.step(1)
+        self.a.step(-1)
 
     def spinSteps(self, steps):
         self.a.step(steps)
